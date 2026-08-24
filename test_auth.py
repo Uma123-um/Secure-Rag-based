@@ -2,7 +2,7 @@ from auth import create_token, verify_token
 
 token = create_token(
     "Uma",
-    "Finance"
+    "HR"
 )
 
 print("Generated Token:\n")

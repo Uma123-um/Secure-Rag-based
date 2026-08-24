@@ -8,4 +8,9 @@ openai
 python-dotenv
 langchain-openai
 langchain-chroma
-
+gunicorn
+langchain-community
+langchain-huggingface
+langchain-text-splitters
+pypdf
+pwdlib[argon2]

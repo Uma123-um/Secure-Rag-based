@@ -1,36 +1,15 @@
-import os
-
-from dotenv import load_dotenv
-
-from langchain_chroma import Chroma
-from langchain_openai import AzureOpenAIEmbeddings
-
-load_dotenv()
-
-embeddings = AzureOpenAIEmbeddings(
-    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-    azure_deployment=os.getenv("EMBEDDING_DEPLOYMENT"),
-    api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
-)
-
-# Load existing vector database
-db = Chroma(
-    persist_directory="./db",
-    embedding_function=embeddings
-)
-
-print("load data from data base",db.get())  # Print the collection to verify the database is loaded correctly
+from vector_store import vector_db
 
 
-def retrieve(query, user):
+def retrieve(question, user):
+    department  = user["department"]
 
-    docs = db.similarity_search(
-        query=query,
+    results = vector_db.similarity_search(
+        question,
         k=3,
-        filter={
-            "department": user["department"]
+        filter = {
+            "department": department
         }
     )
-    print("similar documents:", docs)
-    return docs
+
+    return results
