@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import HTTPBearer
 
 from auth import verify_token
-from rag import retrieve
+from rag1 import retrieve
 
 from langchain_openai import AzureChatOpenAI
 
@@ -50,6 +50,6 @@ def chat(question:str, credentials = Depends(security)):
         "answer": response.content
     }
 
-    answer = response.generations[0][0].text
+    # answer = response.generations[0][0].text
 
-    return {"answer": answer}
+    # return {"answer": answer}
